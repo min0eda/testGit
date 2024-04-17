@@ -13,7 +13,7 @@
 	<p>1.브랜치 초기화 - 특정 지점까지 초기화 하고 싶다면</p>
 	<p>2.reverse commit - 특정 커밋에서 실행한 내용을 취소하고, 이후 내용은 유지하고 싶을 때</p>
 	<p>불필요한 내용</p>
-	<button>클릭해 주세요</button>
+	<button onclick="test()">클릭해 주세요</button>
 </body>
 <script>
 </script>
