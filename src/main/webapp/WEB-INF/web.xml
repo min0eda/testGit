@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://Java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- web.xml은 서버 접속시 가장 먼저 읽힌다. -->
+	<!-- 그래서 주요 설정파일 및 인코딩 설정 등이 들어간다 -->
+	
+	
+	<!-- 한글 깨짐 방지 -->
+   <!-- 사용할 필터 이름과 연결할 클래스 -->
+   <filter>
+      <filter-name>encodingFilter</filter-name>
+       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+       <!-- 인코딩 종류 -->
+       <init-param>
+           <param-name>encoding</param-name>
+           <param-value>UTF-8</param-value>
+       </init-param>
+       <!-- 강제 인코딩 여부 -->
+       <init-param>
+           <param-name>forceEncoding</param-name>
+           <param-value>true</param-value>
+       </init-param>
+   </filter>
+   <!-- 어떤 필터를 언제 사용 할 것인가? -->
+   <filter-mapping>
+       <filter-name>encodingFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+   </filter-mapping> 
+   
+   
+   <!-- 특정 Exception 에 반응 할수도 있다.
+   	<error-page>
+   		<exception-type>java.io.IOException</exception-type>
+   		<location>/error/IOException</location>
+   	</error-page>
+	 -->
+	
+	<!-- 서버가 켜지면 최초로 읽는 설정 파일의 위치 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 서버에 요청을 받았을때 읽는 설정 파일 -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
